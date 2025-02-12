@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 require('dotenv').config();
-
+const cors = require("cors");
 const app = express();
 
 // Connect Database
@@ -9,12 +9,13 @@ const app = express();
 
 // Init Middleware
 app.use(express.json());
-
+app.use(cors())
 // Define Routes
 app.use('/api/users', require('./server/routes/api/users'));
 app.use('/api/auth', require('./server/routes/api/auth'));
 app.use('/api/profile', require('./server/routes/api/profile'));
 app.use('/api/posts', require('./server/routes/api/posts'));
+app.use('/notes',require('./server/routes/notes'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
